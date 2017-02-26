@@ -10,7 +10,7 @@ import UIKit
 @objc protocol DropdownCellDelegate {
     @objc optional func dropdownCell(dropdownCell: DropdownCell, didChangeValue value: Bool)
 }
-class DropdownCell: UITableViewCell {
+class DropdownCell: UITableViewCell,SelectionCellDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dropdownButton: UIButton!

@@ -167,6 +167,9 @@ extension FilterViewController:UITableViewDelegate,UITableViewDataSource{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "dropdownCell") as! DropdownCell
                 distanceValue = CategoryList.distance[distanceState]
                 cell.titleLabel.text = distanceValue
+                if !distanceShowState{
+                   cell.dropdownButton.setImage(#imageLiteral(resourceName: "dropdownIcon"), for: .normal)
+                }
                 cell.delegate = self
                 return cell
             }else{
@@ -188,6 +191,9 @@ extension FilterViewController:UITableViewDelegate,UITableViewDataSource{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "dropdownCell") as! DropdownCell
                 sortValue = CategoryList.sortby[sortState]
                 cell.titleLabel.text = sortValue
+                if !sortbyShowState{
+                    cell.dropdownButton.setImage(#imageLiteral(resourceName: "dropdownIcon"), for: .normal)
+                }
                 cell.delegate = self
                 return cell
             }else{
