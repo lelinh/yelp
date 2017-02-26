@@ -35,7 +35,6 @@ class FilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print("filter View is loaded")
         initView()
         loadSetting()
         tableView.reloadData()
@@ -50,14 +49,6 @@ class FilterViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     @IBAction func onSave(_ sender: UIBarButtonItem) {
-        print("--------------onSave------------------")
-        print(dealsState)
-        print(CategoryList.distance[distanceState])
-        print(CategoryList.sortby[sortState])
-        print(categoryState)
-        print(distanceValue)
-        print(sortValue)
-        print("----------------End onsave----------------")
         var filters = [String]()
         for (row,isSelected) in categoryState {
             if isSelected{
