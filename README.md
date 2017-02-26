@@ -25,9 +25,9 @@ The following **optional** features are implemented:
 - [ ] Infinite scroll for restaurant results.
     - [ ] Implement map view of restaurant results.
 - [ ] Filter page
-- [ ] Implement a custom switch instead of the default UISwitch.
-- [ ] Distance filter should expand as in the real Yelp app
-- [ ] Categories should show a subset of the full list with a "See All" row to expand. Category list is [here](http://www.yelp.com/developers/documentation/category_list).
+- [x] Implement a custom switch instead of the default UISwitch.
+- [x] Distance filter should expand as in the real Yelp app
+- [x] Categories should show a subset of the full list with a "See All" row to expand. Category list is [here](http://www.yelp.com/developers/documentation/category_list).
 - [ ] Implement the restaurant detail page.
 
 The following **additional** features are implemented:
@@ -43,7 +43,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/MwFokmz.gifv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -53,7 +53,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-Copyright [yyyy] [name of copyright owner]
+Copyright [2017] [Linh Le]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
