@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051F1FBE1E62F5E00082D747 /* MoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051F1FBD1E62F5E00082D747 /* MoreCell.swift */; };
 		055DA0201E61AF9B00E0A4BD /* DropdownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DA01F1E61AF9B00E0A4BD /* DropdownCell.swift */; };
 		05C9FD741E5DE19800E1FD99 /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9FD731E5DE19800E1FD99 /* BusinessCell.swift */; };
 		05C9FD781E5DEB4D00E1FD99 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C9FD771E5DEB4D00E1FD99 /* FilterViewController.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		051F1FBD1E62F5E00082D747 /* MoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreCell.swift; sourceTree = "<group>"; };
 		055DA01F1E61AF9B00E0A4BD /* DropdownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownCell.swift; sourceTree = "<group>"; };
 		05C9FD731E5DE19800E1FD99 /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		05C9FD771E5DEB4D00E1FD99 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				05C9FD7A1E5DF0D300E1FD99 /* SwitchCell.swift */,
 				05C9FD821E61639200E1FD99 /* SelectionCell.swift */,
 				055DA01F1E61AF9B00E0A4BD /* DropdownCell.swift */,
+				051F1FBD1E62F5E00082D747 /* MoreCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				055DA0201E61AF9B00E0A4BD /* DropdownCell.swift in Sources */,
 				A581AE341DB53945006544B2 /* YelpClient.swift in Sources */,
 				A581AE321DB53860006544B2 /* Business.swift in Sources */,
+				051F1FBE1E62F5E00082D747 /* MoreCell.swift in Sources */,
 				A5CA688E1DB3E1EA0085DCF9 /* AppDelegate.swift in Sources */,
 				05C9FD831E61639200E1FD99 /* SelectionCell.swift in Sources */,
 				05C9FD7F1E61491800E1FD99 /* CategoryList.swift in Sources */,

@@ -19,7 +19,6 @@ class SwitchCell: UITableViewCell {
     
     @IBOutlet weak var switchButton: UISwitch!
     @IBAction func switchAction(_ sender: UISwitch) {
-        print("switch \(titleLabel.text!) is \(switchButton.isOn)")
         delegate?.switchCell?(switchCell: self, didChangeValue: switchButton.isOn)
     }
     

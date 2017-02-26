@@ -25,6 +25,7 @@ class FilterViewController: UIViewController {
     var sortValue = "auto"
     var distanceShowState = false
     var sortbyShowState = false
+    var categoryShowState = false
     
     let defaults = UserDefaults.standard
 
@@ -34,14 +35,13 @@ class FilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        tableView.delegate = self
-        tableView.dataSource = self
+        print("filter View is loaded")
+        initView()
         loadSetting()
         tableView.reloadData()
     }
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
-        print("viewDidAppear")
         loadSetting()
         tableView.reloadData()
     }
@@ -144,7 +144,14 @@ extension FilterViewController:UITableViewDelegate,UITableViewDataSource{
             }
             
         case "Category":
-            return 40
+            if (indexPath.row < 4) || (indexPath.row == categories.count - 1) {
+                return 40
+            }else{
+                if categoryShowState{
+                    return 40
+                }
+                return 0
+            }
         default:
             return 0
         }
@@ -159,7 +166,9 @@ extension FilterViewController:UITableViewDelegate,UITableViewDataSource{
         case "Dealing":
             let cell = tableView.dequeueReusableCell(withIdentifier: "switchCell") as! SwitchCell
             cell.titleLabel.text = "Offering a deal"
-            cell.switchButton.isOn = dealsState 
+            cell.switchButton.isOn = dealsState
+            customView(view: cell,role: false)
+
             cell.delegate = self
             return cell
         case "Distance":
@@ -170,6 +179,7 @@ extension FilterViewController:UITableViewDelegate,UITableViewDataSource{
                 if !distanceShowState{
                    cell.dropdownButton.setImage(#imageLiteral(resourceName: "dropdownIcon"), for: .normal)
                 }
+                customView(view: cell,role: false)
                 cell.delegate = self
                 return cell
             }else{
@@ -194,6 +204,7 @@ extension FilterViewController:UITableViewDelegate,UITableViewDataSource{
                 if !sortbyShowState{
                     cell.dropdownButton.setImage(#imageLiteral(resourceName: "dropdownIcon"), for: .normal)
                 }
+                customView(view: cell,role: false)
                 cell.delegate = self
                 return cell
             }else{
@@ -205,14 +216,23 @@ extension FilterViewController:UITableViewDelegate,UITableViewDataSource{
                     cell.selectButton.setImage(#imageLiteral(resourceName: "switchIcon"), for: .normal)
                 }
                 cell.titleLabel.text = CategoryList.sortby[indexPath.row]
+                //customView(view: cell,role: false)
+
                 cell.delegate = self
                 return cell
             }
             
         case "Category":
+            if indexPath.row == categories.count - 1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "moreCell") as! MoreCell
+                cell.titleButton.titleLabel?.text = categoryShowState ? "Hide" : "More"
+                cell.delegate = self
+                return cell
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "switchCell") as! SwitchCell
             cell.titleLabel.text = categories[indexPath.row]["name"]
             cell.switchButton.isOn = categoryState[indexPath.row] ?? false
+            customView(view: cell,role: false)
             cell.delegate = self
             return cell
         default:
@@ -223,7 +243,7 @@ extension FilterViewController:UITableViewDelegate,UITableViewDataSource{
         }
     }
 }
-extension FilterViewController: SwitchCellDelegate,SelectionCellDelegate,DropdownCellDelegate {
+extension FilterViewController: SwitchCellDelegate,SelectionCellDelegate,DropdownCellDelegate,MoreCellDelegate {
     func switchCell(switchCell: SwitchCell, didChangeValue value: Bool) {
         let ip = tableView.indexPath(for: switchCell)
         let section = ip?.section
@@ -268,7 +288,6 @@ extension FilterViewController: SwitchCellDelegate,SelectionCellDelegate,Dropdow
     }
     
     func dropdownCell(dropdownCell: DropdownCell, didChangeValue value: Bool) {
-        print("take dropdownCell delegate")
         let ip = tableView.indexPath(for: dropdownCell)
         let section = ip?.section
         let sectionName = nameOfSection(section!)
@@ -286,6 +305,10 @@ extension FilterViewController: SwitchCellDelegate,SelectionCellDelegate,Dropdow
         default:
             break
         }
+        self.tableView.reloadData()
+    }
+    func moreCell(moreCell: MoreCell, didChangeValue value: Bool) {
+        categoryShowState = !categoryShowState
         self.tableView.reloadData()
     }
 }
@@ -306,12 +329,11 @@ extension FilterViewController{
         dealsState = defaults.bool(forKey: "Yelp.Filter.Deals") 
         distanceState = defaults.integer(forKey: "Yelp.Filter.Distance")
         sortState = defaults.integer(forKey: "Yelp.Filter.Sort") 
-        categoryState = (defaults.object(forKey: "Yelp.Filter.Categories") as? [Int:Bool]) ?? [Int:Bool]()
-        
+        let data = (defaults.object(forKey: "Yelp.Filter.Categories"))
+        categoryState = (NSKeyedUnarchiver.unarchiveObject(with: data as! Data) ?? [Int:Bool]()) as! [Int : Bool]
+
         distanceValue = CategoryList.distance[distanceState]
         sortValue = CategoryList.sortby[sortState]
-        print(distanceValue)
-        print(sortValue)
     }
     func saveSettings(){
         defaults.set(dealsState, forKey: "Yelp.Filter.Deals")
@@ -319,5 +341,25 @@ extension FilterViewController{
         defaults.set(sortState, forKey: "Yelp.Filter.Sort")
         let data = NSKeyedArchiver.archivedData(withRootObject: categoryState)
         defaults.set(data, forKey: "Yelp.Filter.Categories")
+    }
+    func initView (){
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.estimatedRowHeight = 50
+        tableView.rowHeight = UITableViewAutomaticDimension
+        //Navigation bar color
+        navigationController?.navigationBar.barTintColor = UIColor(red: 220/255, green: 20/255, blue: 60/255, alpha: 1.0)
+        navigationController?.navigationBar.tintColor = UIColor.white
+    }
+    func customView(view: AnyObject,role: Bool){
+        view.layer.masksToBounds = true
+        view.layer.borderColor = UIColor( red: 244/255, green: 66/255, blue:66/255, alpha: 0.5).cgColor
+        view.layer.borderWidth = 1.0
+        if role == true{
+            view.layer.backgroundColor = UIColor( red: 244/255, green: 66/255, blue:66/255, alpha: 0.5).cgColor
+        }
+        view.layer.cornerRadius = 3 //set corner radius here
+
     }
 }

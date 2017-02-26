@@ -147,6 +147,10 @@ extension BusinessesViewController{
         
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        //Navigation bar color
+        navigationController?.navigationBar.barTintColor = UIColor(red: 220/255, green: 20/255, blue: 60/255, alpha: 1)
+        navigationController?.navigationBar.tintColor = UIColor.white
     }
 
 }
